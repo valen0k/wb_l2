@@ -219,7 +219,11 @@ fmt.Printf("fone after %v", time.Since(start))
 Реализовать простейший telnet-клиент.
 
 Примеры вызовов: <br>
-go-telnet --timeout=10s host port go-telnet mysite.ru 8080 go-telnet --timeout=3s 1.1.1.1 123
+```shell
+go-telnet --timeout=10s host port
+go-telnet mysite.ru 8080
+go-telnet --timeout=3s 1.1.1.1 123
+```
 
 Требования: <br>
 * Программа должна подключаться к указанному хосту 
