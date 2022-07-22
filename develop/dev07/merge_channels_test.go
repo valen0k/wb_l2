@@ -16,18 +16,16 @@ func TestMergeChannels(t *testing.T) {
 	}
 
 	start := time.Now()
-	maxTime := 10 * time.Minute
 	<-MergeChannels(
-		sig(maxTime),
-		sig(maxTime-2*time.Minute),
-		sig(maxTime-8*time.Minute),
-		sig(maxTime-4*time.Minute),
-		sig(maxTime-6*time.Minute),
+		sig(2*time.Hour),
+		sig(5*time.Minute),
+		sig(1*time.Second),
+		sig(1*time.Hour),
+		sig(1*time.Minute),
 	)
 
-	since := time.Since(start) - maxTime
-	res := time.Millisecond * 100
-	if since > res {
-		t.Errorf("%v > %v", since, res)
+	since := time.Since(start)
+	if since > time.Second+2*time.Millisecond {
+		t.Errorf("%v > %v", since, time.Second+2*time.Millisecond)
 	}
 }
