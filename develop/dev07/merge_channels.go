@@ -6,10 +6,8 @@ import (
 
 func MergeChannels(channels ...<-chan interface{}) <-chan interface{} {
 	ch := make(chan interface{})
-	defer close(ch)
-
 	wg := sync.WaitGroup{}
-	wg.Add(1)
+	wg.Add(len(channels))
 
 	for _, channel := range channels {
 		go func(locChan <-chan interface{}) {
@@ -20,6 +18,9 @@ func MergeChannels(channels ...<-chan interface{}) <-chan interface{} {
 		}(channel)
 	}
 
-	wg.Wait()
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
 	return ch
 }
