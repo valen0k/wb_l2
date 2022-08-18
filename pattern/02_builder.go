@@ -1,5 +1,7 @@
 package pattern
 
+import "fmt"
+
 /*
 Реализовать паттерн «строитель».
 Объяснить применимость паттерна, его плюсы и минусы, а также реальные примеры использования данного примера на практике.
@@ -32,10 +34,6 @@ type MyHouse struct {
 	doors   uint8
 	square  float32
 	rooms   uint8
-}
-
-func NewMyHouse() *House {
-	return &House{}
 }
 
 func (h *MyHouse) SetFloors(floors uint8) {
@@ -71,6 +69,15 @@ func (h *MyHouse) Build() House {
 		square:  h.square,
 		rooms:   h.rooms,
 	}
+}
+
+func main() {
+	mHouse := MyHouse{}
+	mHouse.SetDoors(2)
+	mHouse.SetWindows(2)
+	mHouse.SetFloors(1)
+	house := mHouse.Build()
+	fmt.Println(house)
 }
 
 /*

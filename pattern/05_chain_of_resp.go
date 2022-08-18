@@ -15,7 +15,7 @@ type department interface {
 
 type patient struct {
 	firstName       string
-	lastName        bool
+	lastName        string
 	isRegistration  bool
 	isDoctorCheckUp bool
 	isMedicine      bool
@@ -89,6 +89,23 @@ func (c *cashier) execute(p *patient) {
 		fmt.Println("Payment Done")
 	}
 	fmt.Println("Cashier getting money from patient")
+}
+
+func main() {
+	p := &patient{firstName: "Alex", lastName: "Patinson"}
+
+	cash := &cashier{}
+
+	med := &medical{}
+	med.setNext(cash)
+
+	doc := &doctor{}
+	doc.setNext(med)
+
+	rec := &reception{}
+	rec.setNext(doc)
+
+	rec.execute(p)
 }
 
 /*

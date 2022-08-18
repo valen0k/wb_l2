@@ -100,10 +100,15 @@ func (g *gaseousState) heat(*stateContext) {
 	fmt.Println("Nothing happens.")
 }
 
-/*
-
-
- */
+func main() {
+	ct := newStateContext()
+	ct.heat()
+	ct.heat()
+	ct.heat()
+	ct.freeze()
+	ct.freeze()
+	ct.freeze()
+}
 
 /*
 Состояние — это поведенческий паттерн проектирования,

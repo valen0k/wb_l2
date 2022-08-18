@@ -13,18 +13,18 @@ https://en.wikipedia.org/wiki/Facade_pattern
 
 type WalletFacade struct {
 	wallet   *Wallet
-	Security *Security
+	security *Security
 }
 
 func NewWalletFacade() *WalletFacade {
 	return &WalletFacade{
 		wallet:   NewWallet(),
-		Security: NewSecurity(),
+		security: NewSecurity(),
 	}
 }
 
 func (f *WalletFacade) Buy(amount float32, code uint) error {
-	if f.Security.Check(code) {
+	if f.security.Check(code) {
 		err := f.wallet.DebitBalance(amount)
 		if err != nil {
 			return err
@@ -66,6 +66,12 @@ func (w *Wallet) DebitBalance(amount float32) error {
 	w.balance -= amount
 	log.Println("снятие с баланса пополнено")
 	return nil
+}
+
+func main() {
+	facade := NewWalletFacade()
+	log.Println(facade.Buy(99, 12))
+	log.Println(facade.Buy(99, 123))
 }
 
 /*
